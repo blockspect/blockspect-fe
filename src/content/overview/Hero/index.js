@@ -11,12 +11,24 @@ import {
 import Paper from '@mui/material/Paper';
 import InputBase from '@mui/material/InputBase';
 
+import GetTokenBalance from "./GetTokenBalance";
+
 function Hero() {
 
   const [address, setAddress] = useState('');
   const [userData, setUserData] = useState();
 
   const navigate = useNavigate();
+
+  const { balances, updateBalance, getBalance } = GetTokenBalance();
+  const updateWalletBalance = () => {
+    updateBalance();
+  };
+  const [tokenData,setTokenData] = useState('')
+  const [finalData,setFinalData] = useState('')
+  const getWalletBalance = () => {
+    getBalance(address);
+  };
 
   const searchHandler = () => {
     if (address) {
@@ -40,6 +52,19 @@ function Hero() {
     localStorage.setItem('address', address);
     localStorage.setItem('newData',newData)
   }
+
+  getWalletBalance();
+    if(balances){
+      setTokenData(balances)
+      console.log(balances);
+    
+      }
+      if(tokenData){
+      updateWalletBalance()
+      setFinalData(balances)
+      console.log("finalDatafinalData",finalData)
+    
+      }
 
   return (
     <>
