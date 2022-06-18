@@ -116,10 +116,10 @@ function DataTableMUI() {
     setShowModalTo(false);
   };
 
-  // const [originalDataBack,setOriginalDataBack] = useState('')
-  // const removeFilters = () => {
-  //   setOriginalDataBack(userData);
-  // }
+  const [originalDataBack,setOriginalDataBack] = useState('')
+  const removeFilters = () => {
+    setOriginalDataBack(userData);
+  }
 
   if (dataFrom) {
     filterData = dataFrom;
@@ -129,13 +129,13 @@ function DataTableMUI() {
     filterData = userData;
   }
 
-  // if(originalDataBack){
-  //   filterData = originalDataBack;
-  // }
+  if(originalDataBack){
+    filterData = originalDataBack;
+  }
   console.log('userData', userData);
   return (
     <>
-      <div className="d-flex justify-content-center">
+      <div className="d-flex justify-content-center mt-5">
         <Paper sx={{ width: '95%', overflow: 'hidden' }}>
           <div
             className="px-5 d-flex"
@@ -144,10 +144,10 @@ function DataTableMUI() {
             <p style={{ fontWeight: 'bolder' }}>
               Latest {userData.length} of {userData.length} transactions
             </p>
-            {/* <button className="bg-info " style={{color:'white'}} onClick={() => removeFilters()}>Remove Filters</button> */}
+            <Button className="bg-info " style={{color:'white'}} onClick={() => removeFilters()}>Remove Filters</Button>
           </div>
 
-          <TableContainer sx={{ maxHeight: 770 }}>
+          <TableContainer className="mt-1" sx={{ maxHeight: 770 }}>
             <Table stickyHeader aria-label="sticky table">
               <TableHead>
                 <TableRow style={{}}>
@@ -218,8 +218,8 @@ function DataTableMUI() {
                       <TableCell align="center">{row.to}</TableCell>
 
                       <TableCell align="center">
-                        {/* {row.from === address ? (
-                        <button
+                        {row.from === address ? (
+                        <Button
                           style={{
                             background: "rgba(0,201,167,.1)",
                             color: "#00c9a7",
@@ -229,9 +229,9 @@ function DataTableMUI() {
                           }}
                         >
                           Out
-                        </button>
+                        </Button>
                       ) : (
-                        <button
+                        <Button
                           className="btn"
                           style={{
                             background: "rgba(219,154,4,.1)",
@@ -241,8 +241,8 @@ function DataTableMUI() {
                           }}
                         >
                           In
-                        </button>
-                      )} */}
+                        </Button>
+                      )}
                       </TableCell>
                       <TableCell align="center">
                         {row.value} Eth

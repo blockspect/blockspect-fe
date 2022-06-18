@@ -36,7 +36,7 @@ function Hero() {
 
   if(userData){
     const newData = JSON.stringify(userData)
-    navigate("/eth/crypto",{state:{id:address}})
+    navigate(`/eth/${address}`,{state:{id:address}})
     localStorage.setItem('address', address);
     localStorage.setItem('newData',newData)
   }

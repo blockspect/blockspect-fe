@@ -18,6 +18,7 @@ const Loader = (Component) => (props) =>
 const Overview = Loader(lazy(() => import('src/content/overview')));
 
 // Dashboards
+const address = localStorage.getItem('address');
 
 const Crypto = Loader(lazy(() => import('src/content/dashboards/Crypto')));
 
@@ -101,7 +102,7 @@ const routes = [
         element: <Navigate to="tasks" replace />
       },
       {
-        path: 'crypto',
+        path: address,
         element: <Crypto />
       },
     ]

@@ -15,7 +15,6 @@ import { SidebarContext } from 'src/contexts/SidebarContext';
 import DesignServicesTwoToneIcon from '@mui/icons-material/DesignServicesTwoTone';
 import BrightnessLowTwoToneIcon from '@mui/icons-material/BrightnessLowTwoTone';
 import TableChartTwoToneIcon from '@mui/icons-material/TableChartTwoTone';
-import AccountCircleTwoToneIcon from '@mui/icons-material/AccountCircleTwoTone';
 
 const MenuWrapper = styled(Box)(
   ({ theme }) => `
@@ -161,6 +160,7 @@ const SubMenuWrapper = styled(Box)(
 
 function SidebarMenu() {
   const { closeSidebar } = useContext(SidebarContext);
+  const address = localStorage.getItem('address');
 
   return (
     <>
@@ -197,7 +197,7 @@ function SidebarMenu() {
                   disableRipple
                   component={RouterLink}
                   onClick={closeSidebar}
-                  to="/eth/crypto"
+                  to={{pathname:`/eth/${address}`}}
                   startIcon={<BrightnessLowTwoToneIcon />}
                 >
                   Cryptocurrency
@@ -221,17 +221,6 @@ function SidebarMenu() {
                   disableRipple
                   component={RouterLink}
                   onClick={closeSidebar}
-                  to="/management/transactions"
-                  startIcon={<TableChartTwoToneIcon />}
-                >
-                  Transactions List
-                </Button>
-              </ListItem>
-              <ListItem component="div">
-                <Button
-                  disableRipple
-                  component={RouterLink}
-                  onClick={closeSidebar}
                   to="/management/table"
                   startIcon={<TableChartTwoToneIcon />}
                 >
@@ -242,7 +231,7 @@ function SidebarMenu() {
           </SubMenuWrapper>
         </List>
         
-        <List
+        {/* <List
           component="div"
           subheader={
             <ListSubheader component="div" disableSticky>
@@ -265,7 +254,7 @@ function SidebarMenu() {
               </ListItem>
             </List>
           </SubMenuWrapper>
-        </List>
+        </List> */}
       </MenuWrapper>
     </>
   );
