@@ -1,10 +1,10 @@
 import { Typography, Avatar, Grid, useTheme } from '@mui/material';
 
+const str = localStorage.getItem('maindata');
+  const user = JSON.parse(str);
+
 function PageHeader() {
-  const user = {
-    name: 'Catherine Pike',
-    avatar: '/static/images/avatars/1.jpg'
-  };
+
   const theme = useTheme();
 
   return (
@@ -18,7 +18,7 @@ function PageHeader() {
           }}
           variant="rounded"
           alt={user.name}
-          src={user.avatar}
+          src={user.logo}
         />
       </Grid>
       <Grid item>
@@ -26,7 +26,7 @@ function PageHeader() {
           Welcome, {user.name}!
         </Typography>
         <Typography variant="subtitle2">
-          Today is a good day to start trading crypto assets!
+          {user.contractAddress}
         </Typography>
       </Grid>
     </Grid>

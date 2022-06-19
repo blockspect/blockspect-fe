@@ -31,6 +31,10 @@ const Table = Loader(
   lazy(() => import('src/content/applications/DataTableMUI'))
 );
 
+const Blocks = Loader(
+  lazy(() => import('src/content/applications/DataBlocks'))
+);
+
 const UserProfile = Loader(
   lazy(() => import('src/content/applications/Users/profile'))
 );
@@ -122,6 +126,10 @@ const routes = [
       {
         path: 'table',
         element: <Table />
+      },
+      {
+        path: 'blocks',
+        element: <Blocks />
       },
       {
         path: 'profile',

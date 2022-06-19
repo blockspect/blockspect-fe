@@ -227,6 +227,17 @@ function SidebarMenu() {
                   Transactions Table
                 </Button>
               </ListItem>
+              <ListItem component="div">
+                <Button
+                  disableRipple
+                  component={RouterLink}
+                  onClick={closeSidebar}
+                  to="/management/blocks"
+                  startIcon={<TableChartTwoToneIcon />}
+                >
+                  Transactions Blocks
+                </Button>
+              </ListItem>
             </List>
           </SubMenuWrapper>
         </List>

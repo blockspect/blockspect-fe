@@ -45,6 +45,8 @@ const GetTokenBalance = () => {
             x.name = td.name;
             x.symbol = td.symbol;
             console.log(x);
+            const y = JSON.stringify(x);
+            localStorage.setItem("maindata",y)
             return x;
           });
 

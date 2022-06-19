@@ -1,3 +1,4 @@
+import {useEffect} from "react";
 import {
   Button,
   Card,
@@ -59,13 +60,15 @@ function AccountBalance() {
   const theme = useTheme();
 
   const { balances, getBalance } = GetTokenBalance();
-  const address = '0x5d38b4e4783e34e2301a2a36c39a03c45798c4dd';
-  const getWalletBalance = async () => {
-    await getBalance(address);
-  };
-  const logBalance = () => {
-    console.log(balances);
-  };
+  const address = localStorage.getItem('address');
+
+  useEffect(() => {
+  getBalance(address);
+  }, [])
+
+  const str = localStorage.getItem('maindata');
+  const profileData = JSON.parse(str);
+  console.log("profileDataprofileData",profileData)
 
   const chartOptions = {
     chart: {
@@ -141,8 +144,6 @@ function AccountBalance() {
       <Grid spacing={0} container>
         <Grid item xs={12} md={6}>
           <Box p={4}>
-            <Button onClick={getWalletBalance}>Click Here</Button>
-            <Button onClick={logBalance}>Log Balance</Button>
             <Typography
               sx={{
                 pb: 3

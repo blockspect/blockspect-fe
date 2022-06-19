@@ -4,12 +4,12 @@ import PageTitleWrapper from 'src/components/PageTitleWrapper';
 import { Grid, Container } from '@mui/material';
 
 import AccountBalance from './AccountBalance';
-import Wallets from './Wallets';
-import AccountSecurity from './AccountSecurity';
-import WatchList from './WatchList';
+// import Wallets from './Wallets';
+// import AccountSecurity from './AccountSecurity';
+// import WatchList from './WatchList';
 
 import {useLocation} from 'react-router-dom';
-
+// import ProfileData from './ProfileData';
 
 function DashboardCrypto() {
 
@@ -31,10 +31,13 @@ function DashboardCrypto() {
           alignItems="stretch"
           spacing={4}
         >
+          {/* <Grid item xs={12} md={8}>
+            <ProfileData />
+          </Grid> */}
           <Grid item xs={12}>
             <AccountBalance />
           </Grid>
-          <Grid item lg={8} xs={12}>
+          {/* <Grid item lg={8} xs={12}>
             <Wallets />
           </Grid>
           <Grid item lg={4} xs={12}>
@@ -42,7 +45,7 @@ function DashboardCrypto() {
           </Grid>
           <Grid item xs={12}>
             <WatchList />
-          </Grid>
+          </Grid> */}
         </Grid>
       </Container>
     </>
