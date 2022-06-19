@@ -67,43 +67,6 @@ function AccountBalance() {
     console.log(balances);
   };
 
-  const DisplayCrypto = async () => {
-    await getWalletBalance();
-    return (
-      <List
-        disablePadding
-        sx={{
-          width: '100%'
-        }}
-      >
-        {balances?.map((token, i) => {
-          return (
-            <ListItem key={i} disableGutters>
-              <ListItemAvatarWrapper>
-                <img alt="BTC" src={token.logo} />
-              </ListItemAvatarWrapper>
-              <ListItemText
-                primary={token.symbol}
-                primaryTypographyProps={{ variant: 'h5', noWrap: true }}
-                secondary={token.name}
-                secondaryTypographyProps={{
-                  variant: 'subtitle2',
-                  noWrap: true
-                }}
-              />
-              <Box>
-                <Typography align="right" variant="h4" noWrap>
-                  20%
-                </Typography>
-                <Text color="success">{token.tokenBalance} </Text>
-              </Box>
-            </ListItem>
-          );
-        })}
-      </List>
-    );
-  };
-
   const chartOptions = {
     chart: {
       background: 'transparent',
@@ -180,7 +143,6 @@ function AccountBalance() {
           <Box p={4}>
             <Button onClick={getWalletBalance}>Click Here</Button>
             <Button onClick={logBalance}>Log Balance</Button>
-            <Button onClick={DisplayCrypto}>Display Balance</Button>
             <Typography
               sx={{
                 pb: 3
