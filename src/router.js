@@ -103,8 +103,8 @@ const routes = [
       },
       {
         path: address,
-        element: <Crypto />
-      },
+        element: <Crypto _address={address} />
+      }
     ]
   },
   {
@@ -133,11 +133,11 @@ const routes = [
           {
             path: 'details',
             element: <UserProfile />
-          },
+          }
         ]
       }
     ]
-  },
+  }
 ];
 
 export default routes;

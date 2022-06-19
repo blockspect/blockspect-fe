@@ -1,26 +1,26 @@
-import axios from "axios";
-import { ethers } from "ethers";
-import { useState } from "react";
+import axios from 'axios';
+import { ethers } from 'ethers';
+import { useState } from 'react';
 
-const apiKey = "eOAKZcE-zP4hKgK-QL2kovNPQe6ac1TY";
+const apiKey = 'eOAKZcE-zP4hKgK-QL2kovNPQe6ac1TY';
 
 const GetTokenBalance = () => {
-  const [balances, setBalances] = useState();
+  const [balances, setBalances] = useState([]);
   const getBalance = (_address) => {
     const baseURL = `https://eth-mainnet.g.alchemy.com/v2/${apiKey}`;
     let data = JSON.stringify({
-      jsonrpc: "2.0",
-      method: "alchemy_getTokenBalances",
-      params: [`${_address}`, "DEFAULT_TOKENS"],
-      id: 42,
+      jsonrpc: '2.0',
+      method: 'alchemy_getTokenBalances',
+      params: [`${_address}`, 'DEFAULT_TOKENS'],
+      id: 42
     });
     let config = {
-      method: "post",
+      method: 'post',
       url: baseURL,
       headers: {
-        "Content-Type": "application/json",
+        'Content-Type': 'application/json'
       },
-      data: data,
+      data: data
     };
 
     const filterByID = (token) => {
@@ -31,47 +31,51 @@ const GetTokenBalance = () => {
     };
 
     axios(config)
-      .then(function (res) {
+      .then(async function (res) {
         const data = res.data.result.tokenBalances;
-        const filterTokens = data
+        const filterTokens = await data
           .map((x) => {
             x.tokenBalance = ethers.utils.formatEther(x.tokenBalance);
             return x;
           })
-          .filter(filterByID);
-        setBalances(filterTokens);
+          .filter(filterByID)
+          .map(async (x) => {
+            const td = await getTokenDetails(x.contractAddress);
+            x.logo = td.logo;
+            x.name = td.name;
+            x.symbol = td.symbol;
+            console.log(x);
+            return x;
+          });
+
+        const balance = await Promise.all(
+          filterTokens.map(async (i) => {
+            return i;
+          })
+        );
+        setBalances(balance);
+        console.log(balance);
       })
       .catch(function (error) {
         console.log(error);
       });
   };
 
-  const updateBalance = () => {
-    balances.map(async (x) => {
-      const td = await getTokenDetails(x.contractAddress);
-      x.logo = td.logo;
-      x.name = td.name;
-      x.symbol = td.symbol;
-      console.log(x);
-      return x;
-    });
-  };
-
   const getTokenDetails = async (_tokenAddress) => {
     const baseURL = `https://eth-mainnet.g.alchemy.com/v2/${apiKey}`;
     let data = JSON.stringify({
-      jsonrpc: "2.0",
-      method: "alchemy_getTokenMetadata",
+      jsonrpc: '2.0',
+      method: 'alchemy_getTokenMetadata',
       params: [`${_tokenAddress}`],
-      id: 42,
+      id: 42
     });
     let config = {
-      method: "post",
+      method: 'post',
       url: baseURL,
       headers: {
-        "Content-Type": "application/json",
+        'Content-Type': 'application/json'
       },
-      data: data,
+      data: data
     };
 
     const td = await axios(config)
@@ -86,11 +90,10 @@ const GetTokenBalance = () => {
 
   return {
     balances,
-    updateBalance,
-    getBalance,
+    getBalance
   };
 };
 
 export default GetTokenBalance;
 
-// GetTokenBalance("0x5d38b4e4783e34e2301a2a36c39a03c45798c4dd")
+// GetTokenBalance("0x5d38b4e4783e34e2301a2a36c39a03c45798c4dd");

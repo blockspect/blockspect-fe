@@ -3,32 +3,23 @@ import axios from 'axios';
 
 import { Button } from '@mui/material';
 
-import { 
+import {
   // Link as RouterLink,
-  useNavigate } from 'react-router-dom';
+  useNavigate
+} from 'react-router-dom';
 
 // material ui search box
 import Paper from '@mui/material/Paper';
 import InputBase from '@mui/material/InputBase';
 
-import GetTokenBalance from "./GetTokenBalance";
-
 function Hero() {
-
   const [address, setAddress] = useState('');
   const [userData, setUserData] = useState();
 
   const navigate = useNavigate();
 
-  const { balances, updateBalance, getBalance } = GetTokenBalance();
-  const updateWalletBalance = () => {
-    updateBalance();
-  };
-  const [tokenData,setTokenData] = useState('')
-  const [finalData,setFinalData] = useState('')
-  const getWalletBalance = () => {
-    getBalance(address);
-  };
+  // const [tokenData, setTokenData] = useState('');
+  // const [finalData, setFinalData] = useState('');
 
   const searchHandler = () => {
     if (address) {
@@ -46,29 +37,27 @@ function Hero() {
     }
   };
 
-  if(userData){
-    const newData = JSON.stringify(userData)
-    navigate(`/eth/${address}`,{state:{id:address}})
+  if (userData) {
+    const newData = JSON.stringify(userData);
+    navigate(`/eth/${address}`, { state: { id: address } });
     localStorage.setItem('address', address);
-    localStorage.setItem('newData',newData)
+    localStorage.setItem('newData', newData);
   }
 
-  getWalletBalance();
-    if(balances){
-      setTokenData(balances)
-      console.log(balances);
-    
-      }
-      if(tokenData){
-      updateWalletBalance()
-      setFinalData(balances)
-      console.log("finalDatafinalData",finalData)
-    
-      }
+  // getWalletBalance();
+  // if (balances) {
+  //   setTokenData(balances);
+  //   console.log(balances);
+  // }
+  // if (tokenData) {
+
+  //   setFinalData(balances);
+  //   console.log('finalDatafinalData', finalData);
+  // }
 
   return (
     <>
-    <Paper
+      <Paper
         component="form"
         style={{ display: 'flex', justifyContent: 'center' }}
       >
@@ -83,7 +72,7 @@ function Hero() {
 
       <div style={{ display: 'flex', justifyContent: 'center' }}>
         <div>
-          <Button            
+          <Button
             size="medium"
             variant="contained"
             sx={{ mt: 1 }}
@@ -94,7 +83,6 @@ function Hero() {
         </div>
       </div>
     </>
-    
   );
 }
 

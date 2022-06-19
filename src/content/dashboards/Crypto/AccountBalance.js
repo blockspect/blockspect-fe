@@ -17,6 +17,7 @@ import {
 import TrendingUp from '@mui/icons-material/TrendingUp';
 import Text from 'src/components/Text';
 import Chart from 'react-apexcharts';
+import GetTokenBalance from 'src/content/api/GetTokenBalance';
 
 const AvatarSuccess = styled(Avatar)(
   ({ theme }) => `
@@ -56,6 +57,52 @@ const ListItemAvatarWrapper = styled(ListItemAvatar)(
 
 function AccountBalance() {
   const theme = useTheme();
+
+  const { balances, getBalance } = GetTokenBalance();
+  const address = '0x5d38b4e4783e34e2301a2a36c39a03c45798c4dd';
+  const getWalletBalance = async () => {
+    await getBalance(address);
+  };
+  const logBalance = () => {
+    console.log(balances);
+  };
+
+  const DisplayCrypto = async () => {
+    await getWalletBalance();
+    return (
+      <List
+        disablePadding
+        sx={{
+          width: '100%'
+        }}
+      >
+        {balances?.map((token, i) => {
+          return (
+            <ListItem key={i} disableGutters>
+              <ListItemAvatarWrapper>
+                <img alt="BTC" src={token.logo} />
+              </ListItemAvatarWrapper>
+              <ListItemText
+                primary={token.symbol}
+                primaryTypographyProps={{ variant: 'h5', noWrap: true }}
+                secondary={token.name}
+                secondaryTypographyProps={{
+                  variant: 'subtitle2',
+                  noWrap: true
+                }}
+              />
+              <Box>
+                <Typography align="right" variant="h4" noWrap>
+                  20%
+                </Typography>
+                <Text color="success">{token.tokenBalance} </Text>
+              </Box>
+            </ListItem>
+          );
+        })}
+      </List>
+    );
+  };
 
   const chartOptions = {
     chart: {
@@ -131,6 +178,9 @@ function AccountBalance() {
       <Grid spacing={0} container>
         <Grid item xs={12} md={6}>
           <Box p={4}>
+            <Button onClick={getWalletBalance}>Click Here</Button>
+            <Button onClick={logBalance}>Log Balance</Button>
+            <Button onClick={DisplayCrypto}>Display Balance</Button>
             <Typography
               sx={{
                 pb: 3
@@ -232,75 +282,6 @@ function AccountBalance() {
                   <ListItem disableGutters>
                     <ListItemAvatarWrapper>
                       <img
-                        alt="BTC"
-                        src="/static/images/placeholders/logo/bitcoin.png"
-                      />
-                    </ListItemAvatarWrapper>
-                    <ListItemText
-                      primary="BTC"
-                      primaryTypographyProps={{ variant: 'h5', noWrap: true }}
-                      secondary="Bitcoin"
-                      secondaryTypographyProps={{
-                        variant: 'subtitle2',
-                        noWrap: true
-                      }}
-                    />
-                    <Box>
-                      <Typography align="right" variant="h4" noWrap>
-                        20%
-                      </Typography>
-                      <Text color="success">+2.54%</Text>
-                    </Box>
-                  </ListItem>
-                  <ListItem disableGutters>
-                    <ListItemAvatarWrapper>
-                      <img
-                        alt="XRP"
-                        src="/static/images/placeholders/logo/ripple.png"
-                      />
-                    </ListItemAvatarWrapper>
-                    <ListItemText
-                      primary="XRP"
-                      primaryTypographyProps={{ variant: 'h5', noWrap: true }}
-                      secondary="Ripple"
-                      secondaryTypographyProps={{
-                        variant: 'subtitle2',
-                        noWrap: true
-                      }}
-                    />
-                    <Box>
-                      <Typography align="right" variant="h4" noWrap>
-                        10%
-                      </Typography>
-                      <Text color="error">-1.22%</Text>
-                    </Box>
-                  </ListItem>
-                  <ListItem disableGutters>
-                    <ListItemAvatarWrapper>
-                      <img
-                        alt="ADA"
-                        src="/static/images/placeholders/logo/cardano.png"
-                      />
-                    </ListItemAvatarWrapper>
-                    <ListItemText
-                      primary="ADA"
-                      primaryTypographyProps={{ variant: 'h5', noWrap: true }}
-                      secondary="Cardano"
-                      secondaryTypographyProps={{
-                        variant: 'subtitle2',
-                        noWrap: true
-                      }}
-                    />
-                    <Box>
-                      <Typography align="right" variant="h4" noWrap>
-                        40%
-                      </Typography>
-                      <Text color="success">+10.50%</Text>
-                    </Box>
-                  </ListItem>
-                  <ListItem disableGutters>
-                    <ListItemAvatarWrapper>
-                      <img
                         alt="ETH"
                         src="/static/images/placeholders/logo/ethereum.png"
                       />
@@ -321,6 +302,35 @@ function AccountBalance() {
                       <Text color="error">-12.38%</Text>
                     </Box>
                   </ListItem>
+                  {balances?.map((token, i) => {
+                    return (
+                      <ListItem key={i} disableGutters>
+                        <ListItemAvatarWrapper>
+                          <img alt="BTC" src={token.logo} />
+                        </ListItemAvatarWrapper>
+                        <ListItemText
+                          primary={token.symbol}
+                          primaryTypographyProps={{
+                            variant: 'h5',
+                            noWrap: true
+                          }}
+                          secondary={token.name}
+                          secondaryTypographyProps={{
+                            variant: 'subtitle2',
+                            noWrap: true
+                          }}
+                        />
+                        <Box>
+                          <Typography align="right" variant="h4" noWrap>
+                            20%
+                          </Typography>
+                          <Text color="success">
+                            {token.tokenBalance.slice(0, 10)}{' '}
+                          </Text>
+                        </Box>
+                      </ListItem>
+                    );
+                  })}
                 </List>
               </Grid>
             </Grid>
