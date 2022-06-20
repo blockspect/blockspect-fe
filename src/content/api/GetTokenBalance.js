@@ -6,6 +6,18 @@ const apiKey = 'eOAKZcE-zP4hKgK-QL2kovNPQe6ac1TY';
 
 const GetTokenBalance = () => {
   const [balances, setBalances] = useState([]);
+  const [ethBalance, setEthBalances] = useState();
+
+  const getEthBalance = async (_address) => {
+    const network = 'mainnet'; // use rinkeby testnet
+    const provider = ethers.getDefaultProvider(network);
+    provider.getBalance(_address).then((balance) => {
+      const balanceInEth = ethers.utils.formatEther(balance);
+      console.log(`balance: ${balanceInEth} ETH`);
+      setEthBalances(balanceInEth);
+    });
+  };
+
   const getBalance = (_address) => {
     const baseURL = `https://eth-mainnet.g.alchemy.com/v2/${apiKey}`;
     let data = JSON.stringify({
@@ -46,7 +58,7 @@ const GetTokenBalance = () => {
             x.symbol = td.symbol;
             console.log(x);
             const y = JSON.stringify(x);
-            localStorage.setItem("maindata",y)
+            localStorage.setItem('maindata', y);
             return x;
           });
 
@@ -92,7 +104,9 @@ const GetTokenBalance = () => {
 
   return {
     balances,
-    getBalance
+    getBalance,
+    ethBalance,
+    getEthBalance
   };
 };
 

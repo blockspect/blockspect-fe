@@ -1,4 +1,4 @@
-import {useEffect} from "react";
+import { useEffect } from 'react';
 import {
   Button,
   Card,
@@ -58,16 +58,17 @@ const ListItemAvatarWrapper = styled(ListItemAvatar)(
 function AccountBalance() {
   // const theme = useTheme();
 
-  const { balances, getBalance } = GetTokenBalance();
+  const { balances, getBalance, ethBalance, getEthBalance } = GetTokenBalance();
   const address = localStorage.getItem('address');
 
   useEffect(() => {
-  getBalance(address);
-  }, [])
+    getBalance(address);
+    getEthBalance(address);
+  }, []);
 
   const str = localStorage.getItem('maindata');
   const profileData = JSON.parse(str);
-  console.log("profileDataprofileData",profileData)
+  console.log('profileDataprofileData', profileData);
 
   // const chartOptions = {
   //   chart: {
@@ -235,67 +236,66 @@ function AccountBalance() {
                 /> */}
               </Grid>
               <Grid xs={12} sm={7} item display="flex" alignItems="center">
-                <div style={{maxHeight:'300px',overflow:'auto'}}>
-                <List
-                  disablePadding
-                  sx={{
-                    width: '100%'
-                  }}
-                  
-                >
-                  <ListItem disableGutters>
-                    <ListItemAvatarWrapper>
-                      <img
-                        alt="ETH"
-                        src="/static/images/placeholders/logo/ethereum.png"
-                      />
-                    </ListItemAvatarWrapper>
-                    <ListItemText
-                      primary="ETH"
-                      primaryTypographyProps={{ variant: 'h5', noWrap: true }}
-                      secondary="Ethereum"
-                      secondaryTypographyProps={{
-                        variant: 'subtitle2',
-                        noWrap: true
-                      }}
-                    />
-                    <Box>
-                      <Typography align="right" variant="h4" noWrap>
-                        30%
-                      </Typography>
-                      <Text color="error">-12.38%</Text>
-                    </Box>
-                  </ListItem>
-                  {balances?.map((token, i) => {
-                    return (
-                      <ListItem key={i} disableGutters>
-                        <ListItemAvatarWrapper>
-                          <img alt="BTC" src={token.logo} />
-                        </ListItemAvatarWrapper>
-                        <ListItemText
-                          primary={token.symbol}
-                          primaryTypographyProps={{
-                            variant: 'h5',
-                            noWrap: true
-                          }}
-                          secondary={token.name}
-                          secondaryTypographyProps={{
-                            variant: 'subtitle2',
-                            noWrap: true
-                          }}
+                <div style={{ maxHeight: '300px', overflow: 'auto' }}>
+                  <List
+                    disablePadding
+                    sx={{
+                      width: '100%'
+                    }}
+                  >
+                    <ListItem disableGutters>
+                      <ListItemAvatarWrapper>
+                        <img
+                          alt="ETH"
+                          src="/static/images/placeholders/logo/ethereum.png"
                         />
-                        <Box>
-                          <Typography align="right" variant="h4" noWrap>
-                            20%
-                          </Typography>
-                          <Text color="success">
-                            {token.tokenBalance.slice(0, 10)}{' '}
-                          </Text>
-                        </Box>
-                      </ListItem>
-                    );
-                  })}
-                </List>
+                      </ListItemAvatarWrapper>
+                      <ListItemText
+                        primary="ETH"
+                        primaryTypographyProps={{ variant: 'h5', noWrap: true }}
+                        secondary="Ethereum"
+                        secondaryTypographyProps={{
+                          variant: 'subtitle2',
+                          noWrap: true
+                        }}
+                      />
+                      <Box>
+                        <Typography align="right" variant="h4" noWrap>
+                          {ethBalance}
+                        </Typography>
+                        <Text color="error">-12.38%</Text>
+                      </Box>
+                    </ListItem>
+                    {balances?.map((token, i) => {
+                      return (
+                        <ListItem key={i} disableGutters>
+                          <ListItemAvatarWrapper>
+                            <img alt="BTC" src={token.logo} />
+                          </ListItemAvatarWrapper>
+                          <ListItemText
+                            primary={token.symbol}
+                            primaryTypographyProps={{
+                              variant: 'h5',
+                              noWrap: true
+                            }}
+                            secondary={token.name}
+                            secondaryTypographyProps={{
+                              variant: 'subtitle2',
+                              noWrap: true
+                            }}
+                          />
+                          <Box>
+                            <Typography align="right" variant="h4" noWrap>
+                              {token.tokenBalance.slice(0, 10)}
+                            </Typography>
+                            <Text color="success">
+                              {token.tokenBalance.slice(0, 10)}{' '}
+                            </Text>
+                          </Box>
+                        </ListItem>
+                      );
+                    })}
+                  </List>
                 </div>
               </Grid>
             </Grid>
