@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import {
   Card,
   Box,
@@ -14,6 +14,7 @@ import {
 } from '@mui/material';
 import Text from 'src/components/Text';
 import GetTokenBalance from 'src/content/api/GetTokenBalance';
+import axios from 'axios';
 
 const ListItemAvatarWrapper = styled(ListItemAvatar)(
   ({ theme }) => `
@@ -47,10 +48,31 @@ function AccountBalance() {
   const { balances, getBalance, ethBalance, getEthBalance } = GetTokenBalance();
   const address = localStorage.getItem('address');
 
+  const [usdPrice, setUsdPrice] = useState();
+
+  const ethToUsd = async () => {
+    const a = await axios
+      .get(
+        'https://api.coingecko.com/api/v3/simple/price?ids=ethereum&vs_currencies=usd'
+      )
+      .then((res) => {
+        console.log(res.data.ethereum);
+        setUsdPrice(res.data.ethereum.usd);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+    return a;
+  };
+
   useEffect(() => {
     getBalance(address);
     getEthBalance(address);
   }, []);
+
+  useEffect(() => {
+    ethToUsd();
+  }, [ethBalance]);
 
   const str = localStorage.getItem('maindata');
   const profileData = JSON.parse(str);
@@ -71,14 +93,14 @@ function AccountBalance() {
             </Typography>
             <Box>
               <Typography variant="h1" gutterBottom>
-                $54,584.23
+                {Math.trunc(usdPrice * ethBalance)} $
               </Typography>
               <Typography
                 variant="h4"
                 fontWeight="normal"
                 color="text.secondary"
               >
-                1.0045983485234 BTC
+                {ethBalance} ETH
               </Typography>
             </Box>
           </Box>
