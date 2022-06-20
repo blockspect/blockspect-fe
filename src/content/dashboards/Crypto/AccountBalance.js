@@ -134,6 +134,12 @@ function AccountBalance() {
                     }}
                   >
                     <ListItem disableGutters>
+                      <ListItemAvatarWrapper>
+                        <img
+                          alt="BTC"
+                          src="https://static.cdnlogo.com/logos/e/81/ethereum-eth.svg"
+                        />
+                      </ListItemAvatarWrapper>
                       <ListItemText
                         primary="ETH"
                         primaryTypographyProps={{ variant: 'h5', noWrap: true }}
@@ -145,9 +151,9 @@ function AccountBalance() {
                       />
                       <Box>
                         <Typography align="right" variant="h4" noWrap>
-                          {ethBalance}
+                          {ethBalance.slice(0, 10)}
                         </Typography>
-                        <Text color="error">-12.38%</Text>
+                        {/* <Text color="error">-12.38%</Text> */}
                       </Box>
                     </ListItem>
                     {balances?.map((token, i) => {
