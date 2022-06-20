@@ -9,6 +9,7 @@ import AccountBalance from './AccountBalance';
 // import WatchList from './WatchList';
 
 import {useLocation} from 'react-router-dom';
+import Nfts from './Nfts';
 // import ProfileData from './ProfileData';
 
 function DashboardCrypto() {
@@ -36,6 +37,9 @@ function DashboardCrypto() {
           </Grid> */}
           <Grid item xs={12}>
             <AccountBalance />
+          </Grid>
+          <Grid item xs={12}>
+            <Nfts/>
           </Grid>
           {/* <Grid item lg={8} xs={12}>
             <Wallets />

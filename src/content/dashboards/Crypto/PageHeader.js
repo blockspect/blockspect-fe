@@ -1,7 +1,7 @@
 import { Typography, Avatar, Grid, useTheme } from '@mui/material';
 
 const str = localStorage.getItem('maindata');
-  const user = JSON.parse(str);
+const user = JSON.parse(str);
 
 function PageHeader() {
 
@@ -17,16 +17,16 @@ function PageHeader() {
             height: theme.spacing(8)
           }}
           variant="rounded"
-          alt={user.name}
-          src={user.logo}
+          alt={user?.name}
+          src={user?.logo}
         />
       </Grid>
       <Grid item>
         <Typography variant="h3" component="h3" gutterBottom>
-          Welcome, {user.name}!
+          Welcome, {user?.name}!
         </Typography>
         <Typography variant="subtitle2">
-          {user.contractAddress}
+          {user?.contractAddress}
         </Typography>
       </Grid>
     </Grid>

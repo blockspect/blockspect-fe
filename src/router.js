@@ -18,7 +18,6 @@ const Loader = (Component) => (props) =>
 const Overview = Loader(lazy(() => import('src/content/overview')));
 
 // Dashboards
-const address = localStorage.getItem('address');
 
 const Crypto = Loader(lazy(() => import('src/content/dashboards/Crypto')));
 
@@ -34,6 +33,14 @@ const Table = Loader(
 const Blocks = Loader(
   lazy(() => import('src/content/applications/DataBlocks'))
 );
+
+const WhaleWatch = Loader(
+  lazy(() => import('src/content/applications/WhaleWatch'))
+)
+
+const TokenTransfers = Loader(
+  lazy(() => import('src/content/applications/TokenTransfers'))
+)
 
 const UserProfile = Loader(
   lazy(() => import('src/content/applications/Users/profile'))
@@ -106,8 +113,8 @@ const routes = [
         element: <Navigate to="tasks" replace />
       },
       {
-        path: address,
-        element: <Crypto _address={address} />
+        path: 'address',
+        element: <Crypto />
       }
     ]
   },
@@ -130,6 +137,14 @@ const routes = [
       {
         path: 'blocks',
         element: <Blocks />
+      },
+      {
+        path: 'whalewatch',
+        element: <WhaleWatch />
+      },
+      {
+        path: 'tokentransfers',
+        element: <TokenTransfers />
       },
       {
         path: 'profile',

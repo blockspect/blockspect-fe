@@ -160,7 +160,7 @@ const SubMenuWrapper = styled(Box)(
 
 function SidebarMenu() {
   const { closeSidebar } = useContext(SidebarContext);
-  const address = localStorage.getItem('address');
+  // const address = localStorage.getItem('address');
 
   return (
     <>
@@ -197,7 +197,7 @@ function SidebarMenu() {
                   disableRipple
                   component={RouterLink}
                   onClick={closeSidebar}
-                  to={{pathname:`/eth/${address}`}}
+                  to={{pathname:`/eth/address`}}
                   startIcon={<BrightnessLowTwoToneIcon />}
                 >
                   Cryptocurrency
@@ -232,10 +232,32 @@ function SidebarMenu() {
                   disableRipple
                   component={RouterLink}
                   onClick={closeSidebar}
+                  to="/management/whalewatch"
+                  startIcon={<TableChartTwoToneIcon />}
+                >
+                  Whale Watch
+                </Button>
+              </ListItem>
+              <ListItem component="div">
+                <Button
+                  disableRipple
+                  component={RouterLink}
+                  onClick={closeSidebar}
                   to="/management/blocks"
                   startIcon={<TableChartTwoToneIcon />}
                 >
                   Transactions Blocks
+                </Button>
+              </ListItem>
+              <ListItem component="div">
+                <Button
+                  disableRipple
+                  component={RouterLink}
+                  onClick={closeSidebar}
+                  to="/management/tokentransfers"
+                  startIcon={<TableChartTwoToneIcon />}
+                >
+                  Transfer History
                 </Button>
               </ListItem>
             </List>

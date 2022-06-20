@@ -34,26 +34,15 @@ function Hero() {
         .catch((error) => {
           console.log('erooo  group', error);
         });
+        localStorage.setItem('address', address);
     }
   };
 
   if (userData) {
     const newData = JSON.stringify(userData);
-    navigate(`/eth/${address}`, { state: { id: address } });
-    localStorage.setItem('address', address);
+    navigate(`/eth/address`, { state: { id: address } });
     localStorage.setItem('newData', newData);
   }
-
-  // getWalletBalance();
-  // if (balances) {
-  //   setTokenData(balances);
-  //   console.log(balances);
-  // }
-  // if (tokenData) {
-
-  //   setFinalData(balances);
-  //   console.log('finalDatafinalData', finalData);
-  // }
 
   return (
     <>
