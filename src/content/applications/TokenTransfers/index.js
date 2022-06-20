@@ -1,6 +1,5 @@
 import { useEffect } from 'react';
 import GetTokenTransfers from 'src/content/api/GetTokenTransfers';
-import { Button } from '@mui/material';
 import { Card } from 'react-bootstrap';
 
 import ArrowUpwardIcon from '@mui/icons-material/ArrowUpward';
@@ -16,191 +15,115 @@ function TokenTransfers() {
   const { getTokenTxns, tokenTxns } = GetTokenTransfers();
 
   useEffect(() => {
-    getTokenTxns(address);
+    getCoin();
   }, []);
 
-  const allTokens = () => {
-    console.log('tokenTxnstokenTxns', tokenTxns);
+  const getCoin = async () => {
+    await getTokenTxns(address);
   };
 
   return (
     <>
-      <Button onClick={() => allTokens()}>Token Txns</Button>
+      <h5 className="py-5">Transaction History of {address}</h5>
 
-      {tokenTxns?.map(function (d) {
-        return (
-          <div className="px-5 py-3">
-            <Card style={{ border: '1px soild black', borderRadius: '20px' }}>
+      {tokenTxns?.map((element) => {
+                      return (
+                        <Card className="mx-5 my-3">
+              <Card.Header>
+              {parseFloat(element.from) === parseFloat(address) ? (
+                          <h4>Transfer <ArrowUpwardIcon style={{color:'green'}}/> </h4>
+                        ) : (
+                          <h4>Approve <ArrowDownwardIcon style={{color:'red'}}/></h4>
+                        )}
+              </Card.Header>
               <Card.Body>
-                {/* icon */}
-                {address === d?.from ? (
-                  <div
-                    className="d-flex"
-                    style={{ justifyContent: 'space-around',alignItems:'center' }}
-                  >
-                    <div
-                      className="p-1"
-                    >
-                      <ArrowUpwardIcon style={{color:'green'}}/>
-                    </div>
-                    <div>
-                      <OverlayTrigger
-                        placement="bottom"
-                        overlay={
-                          <Tooltip id="button-tooltip-2">
-                            <p style={{ fontWeight: 'bolder' }}>From :</p>{' '}
-                            {d?.from}
-                          </Tooltip>
-                        }
-                      >
-                        <span style={{fontWeight:'bolder'}}>From :</span> {({ ref, ...triggerHandler }) => (
-                          <div {...triggerHandler}>
-                            <p className="my-2" ref={ref}>
-                              {`${d?.from.slice(0, 5)}` +
-                                '....' +
-                                `${d?.from.slice(-5, -1)}` +
-                                `${d?.from.slice(-1)}`}
-                            </p>
-                          </div>
-                        )}
-                      </OverlayTrigger>
-                      <OverlayTrigger
-                        placement="bottom"
-                        overlay={
-                          <Tooltip id="button-tooltip-2">
-                            <p style={{ fontWeight: 'bolder' }}>Hash :</p>{' '}
-                            {d?.hash}
-                          </Tooltip>
-                        }
-                      >
-                        {({ ref, ...triggerHandler }) => (
-                          <div {...triggerHandler}>
-                            <p className="my-2" ref={ref}>
-                              {`${d?.hash.slice(0, 5)}` +
-                                '....' +
-                                `${d?.hash.slice(-5, -1)}` +
-                                `${d?.hash.slice(-1)}`}
-                            </p>
-                          </div>
-                        )}
-                      </OverlayTrigger>
-                    </div>
-                    <div>
-                      <ArrowForwardIcon />
-                    </div>
-                    <div>
-                      <div>
-                      <OverlayTrigger
-                        placement="bottom"
-                        overlay={
-                          <Tooltip id="button-tooltip-2">
-                            <p style={{ fontWeight: 'bolder' }}>To :</p>{' '}
-                            {d?.to}
-                          </Tooltip>
-                        }
-                      >
-                       <span style={{fontWeight:'bolder'}}>To :</span>  {({ ref, ...triggerHandler }) => (
-                          <div {...triggerHandler}>
-                            <p className="my-2" ref={ref}>
-                              {`${d?.to.slice(0, 5)}` +
-                                '....' +
-                                `${d?.to.slice(-5, -1)}` +
-                                `${d?.to.slice(-1)}`}
-                            </p>
-                          </div>
-                        )}
-                      </OverlayTrigger>
-                        <p><span style={{fontWeight:'bolder'}}>Amount :</span> {d?.value}</p>
-                      </div>
-                    </div>
-                  </div>
-                ) : (
-                  <div
-                  className="d-flex"
-                  style={{ justifyContent: 'space-around',alignItems:'center' }}
-                >
-                  <div
-                    className="p-1"
-                  >
-                    <ArrowDownwardIcon style={{color:'red'}}/>
-                  </div>
-                  <div>
-                    <OverlayTrigger
-                      placement="bottom"
-                      overlay={
-                        <Tooltip id="button-tooltip-2">
-                          <p style={{ fontWeight: 'bolder' }}>From :</p>{' '}
-                          {d?.from}
-                        </Tooltip>
-                      }
-                    >
-                      {({ ref, ...triggerHandler }) => (
-                        <div {...triggerHandler}>
-                          <p className="my-2" ref={ref}>
-                          <span style={{fontWeight:'bolder'}}>From :</span> {`${d?.from.slice(0, 5)}` +
-                              '....' +
-                              `${d?.from.slice(-5, -1)}` +
-                              `${d?.from.slice(-1)}`}
-                          </p>
-                        </div>
-                      )}
-                    </OverlayTrigger>
-                    <OverlayTrigger
-                      placement="bottom"
-                      overlay={
-                        <Tooltip id="button-tooltip-2">
-                          <p style={{ fontWeight: 'bolder' }}>Hash :</p>{' '}
-                          {d?.hash}
-                        </Tooltip>
-                      }
-                    >
-                      {({ ref, ...triggerHandler }) => (
-                        <div {...triggerHandler}>
-                          <p className="my-2" ref={ref}>
-                            {`${d?.hash.slice(0, 5)}` +
-                              '....' +
-                              `${d?.hash.slice(-5, -1)}` +
-                              `${d?.hash.slice(-1)}`}
-                          </p>
-                        </div>
-                      )}
-                    </OverlayTrigger>
-                  </div>
-                  <div>
-                    <ArrowForwardIcon />
-                  </div>
-                  <div>
-                    <div>
-                    <OverlayTrigger
-                      placement="bottom"
-                      overlay={
-                        <Tooltip id="button-tooltip-2">
-                          <p style={{ fontWeight: 'bolder' }}>To :</p>{' '}
-                          {d?.to}
-                        </Tooltip>
-                      }
-                    >
-                      {({ ref, ...triggerHandler }) => (
-                        <div {...triggerHandler}>
-                          <p className="my-2" ref={ref}>
-                            {`${d?.to.slice(0, 5)}` +
-                              '....' +
-                              `${d?.to.slice(-5, -1)}` +
-                              `${d?.to.slice(-1)}`}
-                          </p>
-                        </div>
-                      )}
-                    </OverlayTrigger>
-                      <p>{d?.value}</p>
-                    </div>
-                  </div>
+                <div style={{display:'flex',justifyContent:'space-between',alignItems:'center'}}>
+                <div><h6>From :</h6> 
+                <OverlayTrigger
+                          placement="left"
+                          overlay={
+                            <Tooltip id="button-tooltip-2">
+                              <p style={{ fontWeight: 'bolder' }}>
+                                Senders Account :
+                              </p>{' '}
+                              {element.from}
+                            </Tooltip>
+                          }
+                        >
+                          {({ ref, ...triggerHandler }) => (
+                            <div {...triggerHandler}>
+                              <p className="my-2" ref={ref}>
+                                {element.from.slice(0, 5) +
+                                  '....' +
+                                  element.from.slice(-5, -1) +
+                                  element.from.slice(-1)}
+                              </p>
+                            </div>
+                          )}
+                        </OverlayTrigger>
                 </div>
-                )}
+                <div>
+                <ArrowForwardIcon />
+                </div>
+                <div ><h6>To :</h6> 
+                <span><OverlayTrigger
+                          placement="left"
+                          overlay={
+                            <Tooltip id="button-tooltip-2">
+                              <p style={{ fontWeight: 'bolder' }}>
+                                Recievers Account :
+                              </p>{' '}
+                              {element.to}
+                            </Tooltip>
+                          }
+                        >
+                          {({ ref, ...triggerHandler }) => (
+                            <div {...triggerHandler}>
+                              <p className="my-2" ref={ref}>
+                                {element.to.slice(0, 5) +
+                                  '....' +
+                                  element.to.slice(-5, -1) +
+                                  element.to.slice(-1)}
+                              </p>
+                            </div>
+                          )}
+                        </OverlayTrigger></span>
+                </div>
+                </div>
+                <div style={{display:'flex',justifyContent:'space-between',alignItems:'center'}}>
+                
+                <div style={{fontWeight:'bolder'}}><h6 >Amount :</h6> 
+                <div>{element.value} </div>
+                </div>
+                <div><h6>Hash :</h6> 
+                <OverlayTrigger
+                          placement="left"
+                          overlay={
+                            <Tooltip id="button-tooltip-2">
+                              <p style={{ fontWeight: 'bolder' }}>
+                                Hash :
+                              </p>{' '}
+                              {element.from}
+                            </Tooltip>
+                          }
+                        >
+                          {({ ref, ...triggerHandler }) => (
+                            <div {...triggerHandler}>
+                              <p className="my-2" ref={ref}>
+                                {element.hash.slice(0, 5) +
+                                  '....' +
+                                  element.hash.slice(-5, -1) +
+                                  element.hash.slice(-1)}
+                              </p>
+                            </div>
+                          )}
+                        </OverlayTrigger>
+                </div>
+                </div>
               </Card.Body>
             </Card>
-          </div>
-        );
-      })}
+                      );
+                    })}
     </>
   );
 }

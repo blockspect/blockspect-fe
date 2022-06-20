@@ -135,6 +135,7 @@ function DataTableMUI() {
   console.log('userData', userData);
   return (
     <>
+      <h1 className="pt-5 px-3">Tabular Form</h1>  
       <div className="d-flex justify-content-center mt-5">
         <Paper sx={{ width: '95%', overflow: 'hidden' }}>
           <div
@@ -207,10 +208,10 @@ function DataTableMUI() {
                         </OverlayTrigger>
                       </TableCell>
                       <TableCell align="center">
-                        {row.from === address ? (
-                          <p>Approve</p>
-                        ) : (
+                        {parseFloat(row.from) === parseFloat(address) ? (
                           <p>Transfer</p>
+                        ) : (
+                          <p>Approve</p>
                         )}
                       </TableCell>
                       <TableCell align="center">{row.blockNumber}</TableCell>
@@ -218,7 +219,7 @@ function DataTableMUI() {
                       <TableCell align="center">{row.to}</TableCell>
 
                       <TableCell align="center">
-                        {row.from === address ? (
+                        {parseFloat(row.from) === parseFloat(address) ? (
                         <Button
                           style={{
                             background: "rgba(0,201,167,.1)",

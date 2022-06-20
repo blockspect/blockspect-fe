@@ -1,11 +1,11 @@
 import { useEffect } from 'react';
 
-import {Container, Card} from '@mui/material';
+import {Container} from '@mui/material';
 
 import Hero from './Hero';
 
 import logo from "../../assets/img/logo.png"
-
+import Background from "../../assets/img/ba.jfif"
 // const OverviewWrapper = styled(Box)(
 //   () => `
 //     overflow: auto;
@@ -21,16 +21,14 @@ function Overview() {
     localStorage.removeItem("newData")
     localStorage.removeItem("address")
   }, [])
-  // const Background = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQB7BFhDHQVt10DIAd89iQgOBE05NiiZ6273Q&usqp=CAU"
+
   return (
-    <div style={{backgroundColor:'grey',minHeight:'47rem'}}>
-      <div className="d-flex" style={{justifyContent:'center'}}>
+    <div style={{backgroundImage: "url(" + Background + ")",backgroundRepeat: 'no-repeat' ,minHeight:'47rem',backgroundSize:'contain'}}>
+      <div className="d-flex pt-5" style={{justifyContent:'center'}}>
       <img src={logo} alt="logo" height={200} width={200}/>
       </div>
       <Container maxWidth="md" className="mt-5" >
-        <Card sx={{ p: 10, mb: 10, borderRadius: 12 }}>
-          <Hero />
-        </Card>
+          <Hero className="p-3"/>
       </Container>
     </div>
   );

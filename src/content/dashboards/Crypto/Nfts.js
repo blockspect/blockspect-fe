@@ -1,7 +1,12 @@
 import { useEffect } from 'react';
-// import { Button } from '@mui/material';
 import GetNfts from 'src/content/api/GetNfts';
-import Card from 'react-bootstrap/Card';
+
+import {
+  Card,
+  Typography,
+  CardContent,
+  CardMedia
+}from '@mui/material'
 
 function Nfts() {
   const { getNfts, nfts } = GetNfts();
@@ -11,31 +16,34 @@ function Nfts() {
     getNfts(address);
   }, []);
 
-//   const log = () => {
-//     console.log("nftsnfts",nfts);
-//   };
-
   return <div>
-    {/* <Button onClick={() => log()}>Log button</Button> */}
+    <Card>
     <div className="row">
+      {nfts? <h4 className='mx-5 my-1'>NFT's</h4> : null}
     {nfts?.map((item) => (
-        <div className="col-4 py-4 d-flex justify-content-center">
-        <Card   style={{ width: '18rem' }}>
-        <Card.Img variant="top" src={item?.metadata?.image} alt="Image Coming"/>
-        <Card.Body>
-          <Card.Title>
-            {item?.metadata?.name ? <p>{item?.metadata?.name}</p> : <p>{item.contractName}</p>} 
-            </Card.Title>
-          <Card.Text>
-            {item?.floorprice}
-          </Card.Text>
-        </Card.Body>
-      </Card>
+      <div className="col-4 py-4 d-flex justify-content-center">
+      <Card sx={{ maxWidth: 345 }}>
+      <CardMedia
+        component="img"
+        height="200"
+        image={item?.metadata?.image}
+        alt="image--loading"
+      />
+      <CardContent>
+        <Typography gutterBottom variant="h5" component="div">
+        {item?.metadata?.name ? <p>{item?.metadata?.name}</p> : <p>{item.contractName}</p>}
+        </Typography>
+        <Typography variant="body2" color="text.secondary">
+        {item?.floorprice}
+        </Typography>
+      </CardContent>
+    </Card>
         </div> 
     ))}
     </div>
+  </Card>
     
-  </div>;
+  </div>
 }
 
 export default Nfts;

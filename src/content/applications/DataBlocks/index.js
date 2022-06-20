@@ -32,9 +32,9 @@ const str = localStorage.getItem('newData');
         },
       };
   return (
-    <div className="p-5 mt-5">
+    <div className="p-5">
         <Container>
-          <h1>Data In BLocks</h1>
+          <h1 className="pb-5">Data in Blocks</h1>
         <Carousel partialVisible responsive={responsive}>
           {userData.length ? (
             userData.map((item, key) => {

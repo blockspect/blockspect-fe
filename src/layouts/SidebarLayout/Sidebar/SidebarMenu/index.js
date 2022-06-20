@@ -176,7 +176,7 @@ function SidebarMenu() {
                   to="/overview"
                   startIcon={<DesignServicesTwoToneIcon />}
                 >
-                  Overview
+                  Back to Home Page
                 </Button>
               </ListItem>
             </List>

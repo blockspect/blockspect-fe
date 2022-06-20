@@ -34,10 +34,6 @@ const Blocks = Loader(
   lazy(() => import('src/content/applications/DataBlocks'))
 );
 
-const WhaleWatch = Loader(
-  lazy(() => import('src/content/applications/WhaleWatch'))
-)
-
 const TokenTransfers = Loader(
   lazy(() => import('src/content/applications/TokenTransfers'))
 )
@@ -60,6 +56,16 @@ const StatusMaintenance = Loader(
   lazy(() => import('src/content/pages/Status/Maintenance'))
 );
 
+// tools
+
+const Contracts = Loader(
+  lazy(() => import('src/content/tools/smartContaracts'))
+); 
+
+const WhaleWatch = Loader(
+  lazy(() => import('src/content/tools/WhaleWatch'))
+)
+
 const routes = [
   {
     path: '',
@@ -68,6 +74,19 @@ const routes = [
       {
         path: '/',
         element: <Overview />
+      },
+      {
+        path: 'tools',
+        children: [
+          {
+            path: 'contracts',
+            element: <Contracts />
+          },
+          {
+            path: 'whalewatch',
+            element: <WhaleWatch />
+          },
+        ]
       },
       {
         path: 'overview',
@@ -137,10 +156,6 @@ const routes = [
       {
         path: 'blocks',
         element: <Blocks />
-      },
-      {
-        path: 'whalewatch',
-        element: <WhaleWatch />
       },
       {
         path: 'tokentransfers',

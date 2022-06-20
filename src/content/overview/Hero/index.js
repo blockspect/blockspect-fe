@@ -1,20 +1,17 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import axios from 'axios';
 
 import { Button } from '@mui/material';
 
-import {
-  // Link as RouterLink,
-  useNavigate
-} from 'react-router-dom';
+import { Link as RouterLink, useNavigate } from 'react-router-dom';
 
-// material ui search box
-// import Paper from '@mui/material/Paper';
-// import InputBase from '@mui/material/InputBase';
+import { SidebarContext } from 'src/contexts/SidebarContext';
 
-import {Form} from "react-bootstrap"
+import { Form } from 'react-bootstrap';
 
 function Hero() {
+  const { closeSidebar } = useContext(SidebarContext);
+
   const [address, setAddress] = useState('');
   const [userData, setUserData] = useState();
 
@@ -38,29 +35,54 @@ function Hero() {
         .catch((error) => {
           console.log('erooo  group', error);
         });
-        localStorage.setItem('address', address);
-        
+      localStorage.setItem('address', address);
+
       navigate('/eth/address', { state: { id: address } });
-      
     }
   };
 
-  console.log("userData",userData)
+  console.log('userData', userData);
 
   return (
     <>
-    <Form onSubmit={() => searchHandler()}>
-  <Form.Group className="mb-3" controlId="formBasicPassword">
-    <Form.Control type="text" placeholder="Please Enter the address" value={address}
-          onChange={(e) => setAddress(e.target.value)} style={{borderRadius:'20px'}}/>
-  </Form.Group>
-  <div style={{display:'flex',justifyContent:'center'}}>
-  <Button className="bg-secondary" variant="primary" type="submit" >
-    Submit
-  </Button>
-  </div>
-  
-</Form>
+      <Form onSubmit={() => searchHandler()}>
+        <Form.Group className="mb-3" controlId="formBasicPassword">
+          <Form.Control
+            type="text"
+            placeholder="Please Enter the address"
+            value={address}
+            onChange={(e) => setAddress(e.target.value)}
+            style={{ borderRadius: '20px' }}
+          />
+        </Form.Group>
+        <div style={{ display: 'flex', justifyContent: 'center' }}>
+          <Button className="bg-secondary" variant="primary" type="submit">
+            Submit
+          </Button>
+        </div>
+
+        <div
+          className="mt-5"
+          style={{ display: 'flex', justifyContent: 'space-around' }}
+        >
+          <Button
+            component={RouterLink}
+            onClick={closeSidebar}
+            to={{ pathname: `/tools/contracts` }}
+            target="_blank"
+          >
+            Test Your Contract
+          </Button>
+          <Button
+            component={RouterLink}
+            onClick={closeSidebar}
+            to={{ pathname: `/tools/whalewatch` }}
+            target="_blank"
+          >
+            Whale Watch
+          </Button>
+        </div>
+      </Form>
     </>
   );
 }
