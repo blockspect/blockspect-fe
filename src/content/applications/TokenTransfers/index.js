@@ -33,7 +33,7 @@ function TokenTransfers() {
             <Card style={{ border: '1px soild black', borderRadius: '20px' }}>
               <Card.Body>
                 {/* icon */}
-                {address.localeCompare(d?.from) === 0 ? (
+                {address === d?.from ? (
                   <div
                     className="d-flex"
                     style={{ justifyContent: 'space-around',alignItems:'center' }}

@@ -1,17 +1,19 @@
 import { useEffect } from 'react';
 
-import { Box, Container, Card, styled} from '@mui/material';
+import {Container, Card} from '@mui/material';
 
 import Hero from './Hero';
 
-const OverviewWrapper = styled(Box)(
-  () => `
-    overflow: auto;
-    flex: 1;
-    overflow-x: hidden;
-    align-items: center;
-`
-);
+import logo from "../../assets/img/logo.png"
+
+// const OverviewWrapper = styled(Box)(
+//   () => `
+//     overflow: auto;
+//     flex: 1;
+//     overflow-x: hidden;
+//     align-items: center;
+// `
+// );
 
 function Overview() {
   useEffect(() => {
@@ -21,13 +23,16 @@ function Overview() {
   }, [])
   // const Background = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQB7BFhDHQVt10DIAd89iQgOBE05NiiZ6273Q&usqp=CAU"
   return (
-    <OverviewWrapper>
-      <Container maxWidth="lg" >
-        <Card sx={{ p: 10, mb: 10,mt:15, borderRadius: 12 }} >
+    <div style={{backgroundColor:'grey',minHeight:'47rem'}}>
+      <div className="d-flex" style={{justifyContent:'center'}}>
+      <img src={logo} alt="logo" height={200} width={200}/>
+      </div>
+      <Container maxWidth="md" className="mt-5" >
+        <Card sx={{ p: 10, mb: 10, borderRadius: 12 }}>
           <Hero />
         </Card>
       </Container>
-    </OverviewWrapper>
+    </div>
   );
 }
 

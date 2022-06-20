@@ -9,8 +9,10 @@ import {
 } from 'react-router-dom';
 
 // material ui search box
-import Paper from '@mui/material/Paper';
-import InputBase from '@mui/material/InputBase';
+// import Paper from '@mui/material/Paper';
+// import InputBase from '@mui/material/InputBase';
+
+import {Form} from "react-bootstrap"
 
 function Hero() {
   const [address, setAddress] = useState('');
@@ -29,48 +31,36 @@ function Hero() {
         )
         .then((response) => {
           console.log('responseresponse', response.data.result);
+          const newData = JSON.stringify(response.data.result);
+          localStorage.setItem('newData', newData);
           setUserData(response.data.result);
         })
         .catch((error) => {
           console.log('erooo  group', error);
         });
         localStorage.setItem('address', address);
+        
+      navigate('/eth/address', { state: { id: address } });
+      
     }
   };
 
-  if (userData) {
-    const newData = JSON.stringify(userData);
-    navigate(`/eth/address`, { state: { id: address } });
-    localStorage.setItem('newData', newData);
-  }
+  console.log("userData",userData)
 
   return (
     <>
-      <Paper
-        component="form"
-        style={{ display: 'flex', justifyContent: 'center' }}
-      >
-        <InputBase
-          sx={{ ml: 1, flex: 1 }}
-          placeholder="Enter the Address"
-          inputProps={{ 'aria-label': 'Enter The address' }}
-          value={address}
-          onChange={(e) => setAddress(e.target.value)}
-        />
-      </Paper>
-
-      <div style={{ display: 'flex', justifyContent: 'center' }}>
-        <div>
-          <Button
-            size="medium"
-            variant="contained"
-            sx={{ mt: 1 }}
-            onClick={() => searchHandler()}
-          >
-            Search
-          </Button>
-        </div>
-      </div>
+    <Form onSubmit={() => searchHandler()}>
+  <Form.Group className="mb-3" controlId="formBasicPassword">
+    <Form.Control type="text" placeholder="Please Enter the address" value={address}
+          onChange={(e) => setAddress(e.target.value)} style={{borderRadius:'20px'}}/>
+  </Form.Group>
+  <div style={{display:'flex',justifyContent:'center'}}>
+  <Button className="bg-secondary" variant="primary" type="submit" >
+    Submit
+  </Button>
+  </div>
+  
+</Form>
     </>
   );
 }
