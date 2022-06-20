@@ -89,13 +89,14 @@ const str = localStorage.getItem('newData');
                                placement="bottom"
                                overlay={<Tooltip id="button-tooltip-2"><p style={{fontWeight:'bolder'}}>Full Hash :</p> {item.hash}</Tooltip>}
                             >
+                              
                               {({ ref, ...triggerHandler }) => ( 
                                 <div {...triggerHandler}>
                                   <p className="my-2" ref={ref}>
-                                {item.hash.slice(0, 5) +
+                                  <a href={`https://etherscan.io/tx/${item.hash}`}>{item.hash.slice(0, 5) +
                                   "...." +
                                   item.hash.slice(-5, -1) +
-                                  item.hash.slice(-1)}
+                                  item.hash.slice(-1)}</a> 
                               </p>
                                 </div>
                               )}

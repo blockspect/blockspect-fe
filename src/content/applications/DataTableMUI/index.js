@@ -135,7 +135,7 @@ function DataTableMUI() {
   console.log('userData', userData);
   return (
     <>
-      <h1 className="pt-5 px-3">Tabular Form</h1>  
+      <h1 className="p-5">Tabular Form</h1>  
       <div className="d-flex justify-content-center mt-5">
         <Paper sx={{ width: '95%', overflow: 'hidden' }}>
           <div
@@ -180,7 +180,7 @@ function DataTableMUI() {
                   .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                   .map((row) => (
                     <TableRow
-                      key={row.name}
+                      key={row?.name}
                       sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
                     >
                       <TableCell align="center">
@@ -191,7 +191,7 @@ function DataTableMUI() {
                               <p style={{ fontWeight: 'bolder' }}>
                                 Full Hash :
                               </p>{' '}
-                              {row.hash}
+                              {row?.hash}
                             </Tooltip>
                           }
                         >
@@ -208,18 +208,18 @@ function DataTableMUI() {
                         </OverlayTrigger>
                       </TableCell>
                       <TableCell align="center">
-                        {parseFloat(row.from) === parseFloat(address) ? (
+                        {parseFloat(row?.from) === parseFloat(address) ? (
                           <p>Transfer</p>
                         ) : (
                           <p>Approve</p>
                         )}
                       </TableCell>
-                      <TableCell align="center">{row.blockNumber}</TableCell>
-                      <TableCell align="center">{row.from}</TableCell>
-                      <TableCell align="center">{row.to}</TableCell>
+                      <TableCell align="center">{row?.blockNumber}</TableCell>
+                      <TableCell align="center">{row?.from}</TableCell>
+                      <TableCell align="center">{row?.to}</TableCell>
 
                       <TableCell align="center">
-                        {parseFloat(row.from) === parseFloat(address) ? (
+                        {parseFloat(row?.from) === parseFloat(address) ? (
                         <Button
                           style={{
                             background: "rgba(0,201,167,.1)",
@@ -246,8 +246,8 @@ function DataTableMUI() {
                       )}
                       </TableCell>
                       <TableCell align="center">
-                        {row.value} Eth
-                        {/* {Web3.utils.fromWei(row.value, 'ether')} */}
+                        {row?.value} Eth
+                        {/* {Web3.utils.fromWei(row?.value, 'ether')} */}
                       </TableCell>
                     </TableRow>
                   ))}

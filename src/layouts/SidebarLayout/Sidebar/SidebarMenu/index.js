@@ -232,17 +232,6 @@ function SidebarMenu() {
                   disableRipple
                   component={RouterLink}
                   onClick={closeSidebar}
-                  to="/management/whalewatch"
-                  startIcon={<TableChartTwoToneIcon />}
-                >
-                  Whale Watch
-                </Button>
-              </ListItem>
-              <ListItem component="div">
-                <Button
-                  disableRipple
-                  component={RouterLink}
-                  onClick={closeSidebar}
                   to="/management/blocks"
                   startIcon={<TableChartTwoToneIcon />}
                 >
@@ -263,31 +252,6 @@ function SidebarMenu() {
             </List>
           </SubMenuWrapper>
         </List>
-        
-        {/* <List
-          component="div"
-          subheader={
-            <ListSubheader component="div" disableSticky>
-              Accounts
-            </ListSubheader>
-          }
-        >
-          <SubMenuWrapper>
-            <List component="div">
-              <ListItem component="div">
-                <Button
-                  disableRipple
-                  component={RouterLink}
-                  onClick={closeSidebar}
-                  to="/management/profile/details"
-                  startIcon={<AccountCircleTwoToneIcon />}
-                >
-                  User Profile
-                </Button>
-              </ListItem>
-            </List>
-          </SubMenuWrapper>
-        </List> */}
       </MenuWrapper>
     </>
   );

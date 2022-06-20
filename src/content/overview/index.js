@@ -5,7 +5,7 @@ import {Container} from '@mui/material';
 import Hero from './Hero';
 
 import logo from "../../assets/img/logo.png"
-import Background from "../../assets/img/ba.jfif"
+import Background from "../../assets/img/ba2.jfif"
 // const OverviewWrapper = styled(Box)(
 //   () => `
 //     overflow: auto;
