@@ -5,15 +5,7 @@ import {Container} from '@mui/material';
 import Hero from './Hero';
 
 import logo from "../../assets/img/logo.png"
-import Background from "../../assets/img/ba2.jfif"
-// const OverviewWrapper = styled(Box)(
-//   () => `
-//     overflow: auto;
-//     flex: 1;
-//     overflow-x: hidden;
-//     align-items: center;
-// `
-// );
+import Background from "../../assets/img/ethereum.jfif"
 
 function Overview() {
   useEffect(() => {
@@ -23,7 +15,7 @@ function Overview() {
   }, [])
 
   return (
-    <div style={{backgroundImage: "url(" + Background + ")",backgroundRepeat: 'no-repeat' ,minHeight:'47rem',backgroundSize:'contain'}}>
+    <div style={{backgroundImage: "url(" + Background + ")",backgroundRepeat: 'no-repeat' ,minHeight:'45rem',backgroundSize:'100% 100%'}}>
       <div className="d-flex pt-5" style={{justifyContent:'center'}}>
       <img src={logo} alt="logo" height={200} width={200}/>
       </div>

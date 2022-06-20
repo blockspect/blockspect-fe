@@ -16,6 +16,8 @@ function Nfts() {
     getNfts(address);
   }, []);
 
+  console.log("nftsnfts",nfts);
+  
   return <div>
     <Card>
     <div className="row">
@@ -27,7 +29,7 @@ function Nfts() {
         component="img"
         height="200"
         image={item?.metadata?.image}
-        alt="image--loading"
+        alt={item?.metadata?.image}
       />
       <CardContent>
         <Typography gutterBottom variant="h5" component="div">
