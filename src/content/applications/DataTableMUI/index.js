@@ -13,6 +13,7 @@ import { Modal, InputGroup, Form, Button } from 'react-bootstrap';
 import OverlayTrigger from 'react-bootstrap/OverlayTrigger';
 import Tooltip from 'react-bootstrap/Tooltip';
 import { Row, Col } from 'react-bootstrap';
+import { ethers } from 'ethers';
 
 const columns = [
   { id: 'name', label: 'Txn Hash', minWidth: 170, align: 'center' },
@@ -116,10 +117,10 @@ function DataTableMUI() {
     setShowModalTo(false);
   };
 
-  const [originalDataBack,setOriginalDataBack] = useState('')
+  const [originalDataBack, setOriginalDataBack] = useState('');
   const removeFilters = () => {
     setOriginalDataBack(userData);
-  }
+  };
 
   if (dataFrom) {
     filterData = dataFrom;
@@ -129,14 +130,14 @@ function DataTableMUI() {
     filterData = userData;
   }
 
-  if(originalDataBack){
+  if (originalDataBack) {
     filterData = originalDataBack;
   }
   console.log('userData', userData);
   return (
     <>
-      <h1 className="p-5">Tabular Form</h1>  
-      <div className="d-flex justify-content-center mt-5">
+      <h1 className="pb-3 px-5">Tabular Form</h1>
+      <div className="d-flex justify-content-center mt-3">
         <Paper sx={{ width: '95%', overflow: 'hidden' }}>
           <div
             className="px-5 d-flex"
@@ -145,7 +146,13 @@ function DataTableMUI() {
             <p style={{ fontWeight: 'bolder' }}>
               Latest {userData.length} of {userData.length} transactions
             </p>
-            <Button className="bg-info " style={{color:'white'}} onClick={() => removeFilters()}>Remove Filters</Button>
+            <Button
+              className="bg-info "
+              style={{ color: 'white' }}
+              onClick={() => removeFilters()}
+            >
+              Remove Filters
+            </Button>
           </div>
 
           <TableContainer className="mt-1" sx={{ maxHeight: 770 }}>
@@ -220,33 +227,33 @@ function DataTableMUI() {
 
                       <TableCell align="center">
                         {parseFloat(row?.from) === parseFloat(address) ? (
-                        <Button
-                          style={{
-                            background: "rgba(0,201,167,.1)",
-                            color: "#00c9a7",
-                            fontWeight: "bolder",
-                            borderRadius: "6.1875rem",
-                            type : "button"
-                          }}
-                        >
-                          Out
-                        </Button>
-                      ) : (
-                        <Button
-                          className="btn"
-                          style={{
-                            background: "rgba(219,154,4,.1)",
-                            color: "#db9a04",
-                            fontWeight: "bolder",
-                            borderRadius: "6.1875rem",
-                          }}
-                        >
-                          In
-                        </Button>
-                      )}
+                          <Button
+                            style={{
+                              background: 'rgba(0,201,167,.1)',
+                              color: '#00c9a7',
+                              fontWeight: 'bolder',
+                              borderRadius: '6.1875rem',
+                              type: 'button'
+                            }}
+                          >
+                            Out
+                          </Button>
+                        ) : (
+                          <Button
+                            className="btn"
+                            style={{
+                              background: 'rgba(219,154,4,.1)',
+                              color: '#db9a04',
+                              fontWeight: 'bolder',
+                              borderRadius: '6.1875rem'
+                            }}
+                          >
+                            In
+                          </Button>
+                        )}
                       </TableCell>
                       <TableCell align="center">
-                        {row?.value} Eth
+                        {ethers.utils.formatEther(row?.value)} Eth
                         {/* {Web3.utils.fromWei(row?.value, 'ether')} */}
                       </TableCell>
                     </TableRow>

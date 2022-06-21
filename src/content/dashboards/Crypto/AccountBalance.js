@@ -151,7 +151,7 @@ function AccountBalance() {
                       />
                       <Box>
                         <Typography align="right" variant="h4" noWrap>
-                          {ethBalance.slice(0, 10)}
+                          {ethBalance?.slice(0, 10)}
                         </Typography>
                         {/* <Text color="error">-12.38%</Text> */}
                       </Box>

@@ -46,13 +46,14 @@ function Hero() {
   return (
     <>
       <Form onSubmit={() => searchHandler()}>
-        <Form.Group className="mb-3" controlId="formBasicPassword">
+        <Form.Group className="mb-4" controlId="formBasicPassword">
           <Form.Control
+            className="py-2"
             type="text"
             placeholder="Please Enter the address"
             value={address}
             onChange={(e) => setAddress(e.target.value)}
-            style={{ borderRadius: '20px' }}
+            style={{ borderRadius: '30px' }}
           />
         </Form.Group>
         <div style={{ display: 'flex', justifyContent: 'center' }}>
@@ -70,6 +71,7 @@ function Hero() {
             onClick={closeSidebar}
             to={{ pathname: `/tools/contracts` }}
             target="_blank"
+            style={{ color: 'white' }}
           >
             Test Your Contract
           </Button>
@@ -78,6 +80,7 @@ function Hero() {
             onClick={closeSidebar}
             to={{ pathname: `/tools/whalewatch` }}
             target="_blank"
+            style={{ color: 'white' }}
           >
             Whale Watch
           </Button>

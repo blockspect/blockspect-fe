@@ -31,6 +31,9 @@ function DashboardCrypto() {
             <AccountBalance />
           </Grid>
           <Grid item xs={12}>
+            <h4 className="px-5">NFT's Section</h4>
+          </Grid>
+          <Grid item xs={12}>
             <Nfts />
           </Grid>
         </Grid>
